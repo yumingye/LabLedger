@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "D:\数迹实验数据工坊\.venv\Lib\site-packages\playwright\sync_api\_generated.py", line 4422, in launch_persistent_context
+    self._sync(
+  File "D:\数迹实验数据工坊\.venv\Lib\site-packages\playwright\_impl\_sync_base.py", line 124, in _sync
+    return task.result()
+           ^^^^^^^^^^^^^
+  File "D:\数迹实验数据工坊\.venv\Lib\site-packages\playwright\_impl\channel_owner.py", line 387, in finish
+    raise e from None
+  File "D:\数迹实验数据工坊\.venv\Lib\site-packages\playwright\_impl\channel_owner.py", line 352, in finish
+    result = await zone.run_async(lambda: awaitable)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\数迹实验数据工坊\.venv\Lib\site-packages\playwright\_impl\utils\zones.py", line 58, in run_async
+    return await func()
+           ^^^^^^^^^^^^
+  File "D:\数迹实验数据工坊\.venv\Lib\site-packages\playwright\_impl\browser_type.py", line 340, in launch_persistent_context
+    result = await self._channel.launchPersistentContext(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\数迹实验数据工坊\.venv\Lib\site-packages\playwright\_impl\channel_owner.py", line 398, in _mapped
+    return mapper(await awaitable)
+                  ^^^^^^^^^^^^^^^
+playwright._impl._errors.TimeoutError: BrowserType.launch_persistent_context: Timeout 180000ms exceeded.
+Call log:
+  - <launching> C:\Program Files\Google\Chrome\Application\chrome.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,HttpsUpgrades,HttpsFirstBalancedModeAutoEnable,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,AvoidCorsURLLoaderRestartOnRedirect,TcpPortRandomizationWin,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,PreconnectToSearch,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface,SkipListAccountsWithoutGaiaCookies --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --enable-unsafe-swiftshader --edge-skip-compat-layer-relaunch --disable-stack-profiler --disable-infobars --disable-sync --do-not-de-elevate --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --remote-debugging-port=9223 --disable-crash-reporter --disable-breakpad --user-data-dir=D:\数迹实验数据工坊\.runtime\browser-profile about:blank
+  - <launched> pid=42596
+  - [pid=42596][err]
+  - [pid=42596][err] DevTools remote debugging requires a non-default data directory. Specify this using --user-data-dir.
+

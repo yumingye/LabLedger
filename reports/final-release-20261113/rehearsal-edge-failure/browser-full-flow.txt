@@ -1,0 +1,47 @@
+Traceback (most recent call last):
+  File "D:\数迹实验数据工坊\final_optimization\releases\public_20261113\scripts\browser_competition.py", line 138, in <module>
+    if __name__=='__main__': main()
+                             ^^^^^^
+  File "D:\数迹实验数据工坊\final_optimization\releases\public_20261113\scripts\browser_competition.py", line 30, in main
+    browser=pw.chromium.launch(executable_path=r'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe',headless=True,args=['--disable-crash-reporter','--disable-breakpad','--no-first-run','--disable-features=DevToolsDebuggingRestrictions'])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\数迹实验数据工坊\final_optimization\releases\public_20261113\.venv\Lib\site-packages\playwright\sync_api\_generated.py", line 4113, in launch
+    self._sync(
+  File "D:\数迹实验数据工坊\final_optimization\releases\public_20261113\.venv\Lib\site-packages\playwright\_impl\_sync_base.py", line 124, in _sync
+    return task.result()
+           ^^^^^^^^^^^^^
+  File "D:\数迹实验数据工坊\final_optimization\releases\public_20261113\.venv\Lib\site-packages\playwright\_impl\channel_owner.py", line 387, in finish
+    raise e from None
+  File "D:\数迹实验数据工坊\final_optimization\releases\public_20261113\.venv\Lib\site-packages\playwright\_impl\channel_owner.py", line 352, in finish
+    result = await zone.run_async(lambda: awaitable)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\数迹实验数据工坊\final_optimization\releases\public_20261113\.venv\Lib\site-packages\playwright\_impl\utils\zones.py", line 58, in run_async
+    return await func()
+           ^^^^^^^^^^^^
+  File "D:\数迹实验数据工坊\final_optimization\releases\public_20261113\.venv\Lib\site-packages\playwright\_impl\browser_type.py", line 176, in launch
+    await self._channel.launch(
+  File "D:\数迹实验数据工坊\final_optimization\releases\public_20261113\.venv\Lib\site-packages\playwright\_impl\channel_owner.py", line 398, in _mapped
+    return mapper(await awaitable)
+                  ^^^^^^^^^^^^^^^
+playwright._impl._errors.TargetClosedError: BrowserType.launch: Target page, context or browser has been closed
+Browser logs:
+
+<launching> C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,HttpsUpgrades,HttpsFirstBalancedModeAutoEnable,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,AvoidCorsURLLoaderRestartOnRedirect,TcpPortRandomizationWin,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,PreconnectToSearch,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface,SkipListAccountsWithoutGaiaCookies --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --enable-unsafe-swiftshader --edge-skip-compat-layer-relaunch --disable-stack-profiler --disable-infobars --disable-sync --do-not-de-elevate --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --disable-crash-reporter --disable-breakpad --no-first-run --disable-features=DevToolsDebuggingRestrictions --user-data-dir=D:\数迹实验数据工坊\final_optimization\releases\public_20261113\.runtime\tmp\playwright_chromiumdev_profile-C2F5a5 --remote-debugging-pipe --no-startup-window
+<launched> pid=18628
+[pid=18628][err] [18628:41068:1113/174142.706:ERROR:chrome\installer\util\helper.cc:44] Failed to get path from PathService for key: 112: 试图引用不存在的令牌。 (0x3F0)
+[pid=18628][err] 
+[pid=18628][err] DevTools remote debugging requires a non-default data directory. Specify this using --user-data-dir.
+Call log:
+  - <launching> C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,HttpsUpgrades,HttpsFirstBalancedModeAutoEnable,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,AvoidCorsURLLoaderRestartOnRedirect,TcpPortRandomizationWin,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,PreconnectToSearch,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface,SkipListAccountsWithoutGaiaCookies --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --enable-unsafe-swiftshader --edge-skip-compat-layer-relaunch --disable-stack-profiler --disable-infobars --disable-sync --do-not-de-elevate --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --disable-crash-reporter --disable-breakpad --no-first-run --disable-features=DevToolsDebuggingRestrictions --user-data-dir=D:\数迹实验数据工坊\final_optimization\releases\public_20261113\.runtime\tmp\playwright_chromiumdev_profile-C2F5a5 --remote-debugging-pipe --no-startup-window
+  - <launched> pid=18628
+  - [pid=18628][err] [18628:41068:1113/174142.706:ERROR:chrome\installer\util\helper.cc:44] Failed to get path from PathService for key: 112: 试图引用不存在的令牌。 (0x3F0)
+  - [pid=18628][err]
+  - [pid=18628][err] DevTools remote debugging requires a non-default data directory. Specify this using --user-data-dir.
+  - [pid=18628] <gracefully close start>
+  - [pid=18628] <kill>
+  - [pid=18628] <will force kill>
+  - [pid=18628] <process did exit: exitCode=0, signal=null>
+  - [pid=18628] starting temporary directories cleanup
+  - [pid=18628] finished temporary directories cleanup
+  - [pid=18628] <gracefully close end>
+

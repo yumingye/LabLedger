@@ -1,0 +1,104 @@
+[
+  {
+    "gate": "G1",
+    "requirement": "项目正常启动",
+    "status": "PASS",
+    "evidence": "真实服务健康检查 HTTP 200，浏览器页面正常"
+  },
+  {
+    "gate": "G2",
+    "requirement": "实验项目管理",
+    "status": "PASS",
+    "evidence": "CRUD、时间戳、同名项目选择回归测试"
+  },
+  {
+    "gate": "G3",
+    "requirement": "数据录入编辑删除",
+    "status": "PASS",
+    "evidence": "表格操作与单记录表单；界面测试覆盖增改删"
+  },
+  {
+    "gate": "G4",
+    "requirement": "数据持久化",
+    "status": "PASS",
+    "evidence": "新 Store、独立 Python 进程与两次真实服务进程恢复"
+  },
+  {
+    "gate": "G5",
+    "requirement": "CSV 导入导出",
+    "status": "PASS",
+    "evidence": "UTF-8/GB18030、表头与列数检查；浏览器实际上传及下载"
+  },
+  {
+    "gate": "G6",
+    "requirement": "数据质量检查",
+    "status": "PASS",
+    "evidence": "缺失、重复、数字、日期、范围、IQR 与完整率"
+  },
+  {
+    "gate": "G7",
+    "requirement": "统计结果正确",
+    "status": "PASS",
+    "evidence": "与已知均值/方差/斜率/R²/变化率精确比对"
+  },
+  {
+    "gate": "G8",
+    "requirement": "三种图表生成",
+    "status": "PASS",
+    "evidence": "参数化测试及浏览器真实折线/柱状/散点"
+  },
+  {
+    "gate": "G9",
+    "requirement": "PNG 导出",
+    "status": "PASS",
+    "evidence": "PNG 签名、解码尺寸及真实文件下载"
+  },
+  {
+    "gate": "G10",
+    "requirement": "Dashboard 恢复",
+    "status": "PASS",
+    "evidence": "SQLite 配置、浏览器刷新及真实服务重启"
+  },
+  {
+    "gate": "G11",
+    "requirement": "README 完整",
+    "status": "PASS",
+    "evidence": "包含需求列举的 16 项，真实团队信息明确待确认"
+  },
+  {
+    "gate": "G12",
+    "requirement": "第三方许可证声明",
+    "status": "PASS",
+    "evidence": "实际依赖清单、许可证文本及官方来源"
+  },
+  {
+    "gate": "G13",
+    "requirement": "AI 使用声明",
+    "status": "PASS",
+    "evidence": "实际 Codex 使用、ChatGPT 历史待核实、人工审核待确认"
+  },
+  {
+    "gate": "G14",
+    "requirement": "自动化测试",
+    "status": "PASS",
+    "evidence": "39 项全部通过，见 junit.xml"
+  },
+  {
+    "gate": "G15",
+    "requirement": "真实演示流程",
+    "status": "PASS",
+    "evidence": "真实浏览器视频、截图、上传下载及录制材料"
+  },
+  {
+    "gate": "G16",
+    "requirement": "D 盘存储隔离",
+    "status": "PASS",
+    "evidence": "受控项目路径、环境变量和产物均在根目录；不等同 OS 全量文件写入审计"
+  },
+  {
+    "gate": "G17",
+    "requirement": "交付包校验",
+    "status": "PASS",
+    "evidence": "build_submission.py 对 ZIP CRC 和每个文件 SHA256 逐项校验；结果在交付成果/package-verification.json"
+  }
+]

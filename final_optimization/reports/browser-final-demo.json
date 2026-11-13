@@ -1,0 +1,70 @@
+{
+  "steps": [
+    "created experiment, schema, CSV upload 121 rows",
+    "deduplicate, median fill, IQR mark, retained original version",
+    "statistics regression snapshot",
+    "stratified algorithm comparison saved",
+    "line box heatmap, PNG SVG HTML downloads",
+    "hashed dossier cleaning+statistics replay, stratified diagnostics, plan and confidence intervals",
+    "report generated and five export formats downloaded",
+    "real browser database backup upload and restore",
+    "real process stop/start, 120 rows and history restored"
+  ],
+  "downloads": [
+    {
+      "name": "LabLedger_chart.png",
+      "bytes": 33975
+    },
+    {
+      "name": "LabLedger_chart.svg",
+      "bytes": 41420
+    },
+    {
+      "name": "LabLedger_chart.html",
+      "bytes": 4860227
+    },
+    {
+      "name": "LabLedger_dossier.json",
+      "bytes": 169770
+    },
+    {
+      "name": "LabLedger_diagnostics.csv",
+      "bytes": 1872
+    },
+    {
+      "name": "LabLedger_report.html",
+      "bytes": 52059
+    },
+    {
+      "name": "LabLedger_report.md",
+      "bytes": 18513
+    },
+    {
+      "name": "LabLedger_report.zip",
+      "bytes": 68944
+    },
+    {
+      "name": "LabLedger_data.csv",
+      "bytes": 9789
+    },
+    {
+      "name": "summary.png",
+      "bytes": 17188
+    },
+    {
+      "name": "LabLedger_backup.sqlite3",
+      "bytes": 741376
+    },
+    {
+      "name": "LabLedger_project.json",
+      "bytes": 362163
+    }
+  ],
+  "url": "http://127.0.0.1:8507",
+  "restart": "PASS",
+  "page_errors": [],
+  "elapsed_seconds": 211.06,
+  "video": "D:\\数迹实验数据工坊\\demo\\recordings\\LabLedger_Competition_Final_Demo.mp4",
+  "duration": 211.32,
+  "status": "PASS"
+}

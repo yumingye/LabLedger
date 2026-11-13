@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="89" time="12.893" timestamp="2026-11-12T20:39:20.297284+08:00" hostname="LAPTOP-JHL9LGMU"><testcase classname="tests.test_competition_core" name="test_conditional_imputation_and_outlier" time="0.006" /><testcase classname="tests.test_competition_core" name="test_mean_curve_not_repeated_measurement_lines" time="0.232" /><testcase classname="tests.test_competition_core" name="test_report_staleness_and_unique_archives" time="1.060"><failure message="AttributeError: filtered_state not found in session_state.">self = SessionState(_old_state={'$$STREAMLIT_INTERNAL_KEY_TESTING': {'$$ID-97aefe38b48279ea511f810584b12046-active_project': ...ams={}), _persist_tracker=PersistedWidgetTracker(_scopes={}, _widget_pages={}, _value_pages={}, _pending_resets=set()))
+key = 'filtered_state'
+
+    def __getitem__(self, key: str) -&gt; Any:
+        wid_key_map = self._key_id_mapper.id_key_mapping
+        widget_id = self._get_widget_id(key)
+    
+        if widget_id in wid_key_map and widget_id == key:
+            # the "key" is a raw widget id, so get its associated user key for lookup
+            key = wid_key_map[widget_id]
+        try:
+&gt;           base_value = self._getitem(widget_id, key)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv\Lib\site-packages\streamlit\runtime\state\session_state.py:776: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = SessionState(_old_state={'$$STREAMLIT_INTERNAL_KEY_TESTING': {'$$ID-97aefe38b48279ea511f810584b12046-active_project': ...ams={}), _persist_tracker=PersistedWidgetTracker(_scopes={}, _widget_pages={}, _value_pages={}, _pending_resets=set()))
+widget_id = 'filtered_state', user_key = 'filtered_state'
+
+    def _getitem(self, widget_id: str | None, user_key: str | None) -&gt; Any:
+        """Get the value of an entry in Session State, using either the
+        user-provided key or a widget id as appropriate for the internal dict
+        being accessed.
+    
+        At least one of the arguments must have a value.
+        """
+        if user_key is None and widget_id is None:  # pragma: no cover - defensive
+            raise ValueError(
+                "user_key and widget_id cannot both be None. This should never happen."
+            )
+    
+        if user_key is not None:
+            try:
+                return self._new_session_state[user_key]
+            except KeyError:
+                pass
+    
+        if widget_id is not None:
+            try:
+                return self._new_widget_state[widget_id]
+            except KeyError:
+                pass
+    
+        # Typically, there won't be both a widget id and an associated state key in
+        # old state at the same time, so the order we check is arbitrary.
+        # The exception is if session state is set and then a later run has
+        # a widget created, so the widget id entry should be newer.
+        # The opposite case shouldn't happen, because setting the value of a widget
+        # through session state will result in the next widget state reflecting that
+        # value.
+        if widget_id is not None:
+            try:
+                return self._old_state[widget_id]
+            except KeyError:
+                pass
+    
+        if user_key is not None:
+            try:
+                return self._old_state[user_key]
+            except KeyError:
+                pass
+    
+        # We'll never get here
+&gt;       raise KeyError
+E       KeyError
+
+.venv\Lib\site-packages\streamlit\runtime\state\session_state.py:829: KeyError
+
+During handling of the above exception, another exception occurred:
+
+self = {'page': '报告中心', 'fields_1': {'edited_rows': {}, 'added_rows': [], 'deleted_rows': []}, 'active_project': 1, 'FormSubm...late_字段说明.md': False, 'template_算法性能示例.csv': False, 'template_化学实验示例.csv': False, 'FormSubmitter:rename_1-保存名称': False}
+key = 'filtered_state'
+
+    def __getattr__(self, key: str) -&gt; Any:
+        try:
+&gt;           return self[key]
+                   ^^^^^^^^^
+
+.venv\Lib\site-packages\streamlit\testing\v1\app_test.py:307: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\streamlit\testing\v1\app_test.py:292: in __getitem__
+    return self._state[key]
+           ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\streamlit\runtime\state\safe_session_state.py:123: in __getitem__
+    return self._state[key]
+           ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = SessionState(_old_state={'$$STREAMLIT_INTERNAL_KEY_TESTING': {'$$ID-97aefe38b48279ea511f810584b12046-active_project': ...ams={}), _persist_tracker=PersistedWidgetTracker(_scopes={}, _widget_pages={}, _value_pages={}, _pending_resets=set()))
+key = 'filtered_state'
+
+    def __getitem__(self, key: str) -&gt; Any:
+        wid_key_map = self._key_id_mapper.id_key_mapping
+        widget_id = self._get_widget_id(key)
+    
+        if widget_id in wid_key_map and widget_id == key:
+            # the "key" is a raw widget id, so get its associated user key for lookup
+            key = wid_key_map[widget_id]
+        try:
+            base_value = self._getitem(widget_id, key)
+            return (
+                apply_presenter(self, widget_id, base_value)
+                if widget_id is not None
+                else base_value
+            )
+        except KeyError:
+&gt;           raise KeyError(_missing_key_error_message(key))
+E           KeyError: 'st.session_state has no key "filtered_state". Did you forget to initialize it? More info: https://docs.streamlit.io/develop/concepts/architecture/session-state#initialization'
+
+.venv\Lib\site-packages\streamlit\runtime\state\session_state.py:783: KeyError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = WindowsPath('D:/数迹实验数据工坊/.runtime/competition-r1/test_report_staleness_and_uniq0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001F59D207C80&gt;
+
+    def test_report_staleness_and_unique_archives(tmp_path,monkeypatch):
+        path=tmp_path/'db.sqlite3'; monkeypatch.setenv('LABLEDGER_DB',str(path)); s=Store(path); p=load_algorithm_demo(s); d=s.datasets(p)[0]['id']
+        app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'app.py'),default_timeout=30).run(); app.radio(key='page').set_value('报告中心').run()
+        def generate(): next(b for b in app.button if b.label=='生成完整实验报告').click().run()
+        generate(); generate(); records=[json.loads(r['payload'])['file'] for r in s.history(p) if r['kind']=='报告导出']
+        assert len(set(records))==2
+        frame=s.frame(p,d); s.save_frame(p,d,frame.iloc[:10]); app.run()
+&gt;       assert f'report_{p}_{d}' not in app.session_state.filtered_state
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_competition_core.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = {'page': '报告中心', 'fields_1': {'edited_rows': {}, 'added_rows': [], 'deleted_rows': []}, 'active_project': 1, 'FormSubm...late_字段说明.md': False, 'template_算法性能示例.csv': False, 'template_化学实验示例.csv': False, 'FormSubmitter:rename_1-保存名称': False}
+key = 'filtered_state'
+
+    def __getattr__(self, key: str) -&gt; Any:
+        try:
+            return self[key]
+        except KeyError:
+&gt;           raise AttributeError(f"{key} not found in session_state.")
+E           AttributeError: filtered_state not found in session_state.
+
+.venv\Lib\site-packages\streamlit\testing\v1\app_test.py:309: AttributeError</failure></testcase><testcase classname="tests.test_core" name="test_project_crud_and_times" time="0.037" /><testcase classname="tests.test_core" name="test_record_crud_and_persistence" time="0.592" /><testcase classname="tests.test_core" name="test_project_isolation" time="0.039" /><testcase classname="tests.test_core" name="test_optimistic_lock_and_atomicity" time="0.028" /><testcase classname="tests.test_core" name="test_concurrent_stale_writers" time="0.039" /><testcase classname="tests.test_core" name="test_invalid_name[]" time="0.023" /><testcase classname="tests.test_core" name="test_invalid_name[  ]" time="0.024" /><testcase classname="tests.test_core" name="test_invalid_name[name2]" time="0.024" /><testcase classname="tests.test_core" name="test_schema_and_columns" time="0.024" /><testcase classname="tests.test_core" name="test_csv_import[utf-8-sig]" time="0.002" /><testcase classname="tests.test_core" name="test_csv_import[gb18030]" time="0.002" /><testcase classname="tests.test_core" name="test_csv_invalid" time="0.000" /><testcase classname="tests.test_core" name="test_exports_chinese_and_raw" time="0.001" /><testcase classname="tests.test_core" name="test_quality_all_rules" time="0.002" /><testcase classname="tests.test_core" name="test_iqr" time="0.001" /><testcase classname="tests.test_core" name="test_invalid_numeric[inf]" time="0.000" /><testcase classname="tests.test_core" name="test_invalid_numeric[NaN]" time="0.000" /><testcase classname="tests.test_core" name="test_invalid_numeric[-inf]" time="0.000" /><testcase classname="tests.test_core" name="test_invalid_numeric[text]" time="0.000" /><testcase classname="tests.test_core" name="test_invalid_numeric[True]" time="0.000" /><testcase classname="tests.test_core" name="test_dates" time="0.000" /><testcase classname="tests.test_core" name="test_statistics" time="0.003" /><testcase classname="tests.test_core" name="test_trend" time="0.003" /><testcase classname="tests.test_core" name="test_charts_and_png[\u6298\u7ebf\u56fe]" time="0.071" /><testcase classname="tests.test_core" name="test_charts_and_png[\u67f1\u72b6\u56fe]" time="0.060" /><testcase classname="tests.test_core" name="test_charts_and_png[\u6563\u70b9\u56fe]" time="0.072" /><testcase classname="tests.test_core" name="test_date_chart" time="0.085" /><testcase classname="tests.test_core" name="test_empty_and_single" time="0.059" /><testcase classname="tests.test_core" name="test_dashboard_restore_and_demo" time="0.053" /><testcase classname="tests.test_ui" name="test_empty_and_load_demo" time="0.216" /><testcase classname="tests.test_ui" name="test_all_pages[\u6570\u636e\u8bb0\u5f55]" time="0.257" /><testcase classname="tests.test_ui" name="test_all_pages[\u8d28\u91cf\u4e2d\u5fc3]" time="0.242" /><testcase classname="tests.test_ui" name="test_all_pages[\u7edf\u8ba1\u5206\u6790]" time="0.244" /><testcase classname="tests.test_ui" name="test_all_pages[\u56fe\u8868\u5de5\u574a]" time="0.306" /><testcase classname="tests.test_ui" name="test_all_pages[\u4eea\u8868\u76d8]" time="0.297" /><testcase classname="tests.test_ui" name="test_all_pages[\u5bfc\u51fa\u4e2d\u5fc3]" time="0.242" /><testcase classname="tests.test_ui" name="test_create_project_and_rename" time="0.205" /><testcase classname="tests.test_ui" name="test_record_forms_and_dashboard" time="0.747" /><testcase classname="tests.test_ui" name="test_same_name_projects_remain_selected" time="0.381" /><testcase classname="tests.test_v2" name="test_migration" time="0.029" /><testcase classname="tests.test_v2" name="test_meta_isolation_restart" time="0.047" /><testcase classname="tests.test_v2" name="test_clean_operations[\u5220\u9664\u7f3a\u5931\u884c]" time="0.001" /><testcase classname="tests.test_v2" name="test_clean_operations[\u5747\u503c\u586b\u5145]" time="0.001" /><testcase classname="tests.test_v2" name="test_clean_operations[\u4e2d\u4f4d\u6570\u586b\u5145]" time="0.001" /><testcase classname="tests.test_v2" name="test_clean_operations[\u4f17\u6570\u586b\u5145]" time="0.001" /><testcase classname="tests.test_v2" name="test_clean_operations[\u6307\u5b9a\u503c\u586b\u5145]" time="0.001" /><testcase classname="tests.test_v2" name="test_clean_operations[\u5220\u9664\u91cd\u590d\u884c]" time="0.001" /><testcase classname="tests.test_v2" name="test_clean_operations[\u5f02\u5e38\u503c\u6807\u8bb0]" time="0.002" /><testcase classname="tests.test_v2" name="test_clean_operations[\u6570\u503c\u8f6c\u6362]" time="0.001" /><testcase classname="tests.test_v2" name="test_clean_operations[\u65e5\u671f\u8f6c\u6362]" time="0.001" /><testcase classname="tests.test_v2" name="test_clean_operations[\u6392\u5e8f]" time="0.001" /><testcase classname="tests.test_v2" name="test_clean_operations[\u7b5b\u9009]" time="0.001" /><testcase classname="tests.test_v2" name="test_clean_operations[\u5206\u7ec4\u5747\u503c]" time="0.003" /><testcase classname="tests.test_v2" name="test_clean_operations[\u6807\u51c6\u5316]" time="0.001" /><testcase classname="tests.test_v2" name="test_clean_operations[\u5f52\u4e00\u5316]" time="0.001" /><testcase classname="tests.test_v2" name="test_clean_operations[\u6d3e\u751f\u5b57\u6bb5]" time="0.001" /><testcase classname="tests.test_v2" name="test_outlier_confirmation" time="0.002" /><testcase classname="tests.test_v2" name="test_versions" time="0.051" /><testcase classname="tests.test_v2" name="test_describe" time="0.001" /><testcase classname="tests.test_v2" name="test_correlation_regression" time="0.006" /><testcase classname="tests.test_v2" name="test_hypothesis_boundaries" time="0.665" /><testcase classname="tests.test_v2" name="test_ai_fallback" time="0.023" /><testcase classname="tests.test_v2" name="test_quality_compare_trend" time="0.021" /><testcase classname="tests.test_v2" name="test_advanced_exports[\u6298\u7ebf\u56fe]" time="0.172" /><testcase classname="tests.test_v2" name="test_advanced_exports[\u67f1\u72b6\u56fe]" time="0.165" /><testcase classname="tests.test_v2" name="test_advanced_exports[\u6563\u70b9\u56fe]" time="0.157" /><testcase classname="tests.test_v2" name="test_advanced_exports[\u76f4\u65b9\u56fe]" time="0.200" /><testcase classname="tests.test_v2" name="test_advanced_exports[\u7bb1\u7ebf\u56fe]" time="0.135" /><testcase classname="tests.test_v2" name="test_advanced_exports[\u5c0f\u63d0\u7434\u56fe]" time="0.140" /><testcase classname="tests.test_v2" name="test_advanced_exports[\u70ed\u529b\u56fe]" time="0.184" /><testcase classname="tests.test_v2" name="test_advanced_exports[\u997c\u56fe]" time="0.091" /><testcase classname="tests.test_v2" name="test_advanced_exports[\u9762\u79ef\u56fe]" time="0.239" /><testcase classname="tests.test_v2" name="test_advanced_exports[\u8bef\u5dee\u68d2\u56fe]" time="0.179" /><testcase classname="tests.test_v2" name="test_advanced_exports[\u591a\u7ec4\u5bf9\u6bd4\u56fe]" time="0.168" /><testcase classname="tests.test_v2" name="test_advanced_exports[\u56de\u5f52\u62df\u5408\u56fe]" time="0.179" /><testcase classname="tests.test_v2" name="test_report_and_roundtrip" time="0.208" /><testcase classname="tests.test_v2" name="test_bad_import" time="0.036" /><testcase classname="tests.test_v2_ui" name="test_v2_pages[\u5b9e\u9a8c\u8be6\u60c5]" time="0.266" /><testcase classname="tests.test_v2_ui" name="test_v2_pages[\u6570\u636e\u6e05\u6d17]" time="0.270" /><testcase classname="tests.test_v2_ui" name="test_v2_pages[\u4e13\u4e1a\u7edf\u8ba1]" time="0.604" /><testcase classname="tests.test_v2_ui" name="test_v2_pages[\u5b9e\u9a8c\u5bf9\u6bd4]" time="0.267" /><testcase classname="tests.test_v2_ui" name="test_v2_pages[\u9ad8\u7ea7\u56fe\u8868]" time="0.355" /><testcase classname="tests.test_v2_ui" name="test_v2_pages[\u667a\u80fd\u5206\u6790]" time="0.267" /><testcase classname="tests.test_v2_ui" name="test_v2_pages[\u62a5\u544a\u4e2d\u5fc3]" time="0.270" /><testcase classname="tests.test_v2_ui" name="test_v2_pages[\u7cfb\u7edf\u8bbe\u7f6e]" time="0.244" /><testcase classname="tests.test_v2_ui" name="test_clean_preview_save" time="0.535" /></testsuite></testsuites>

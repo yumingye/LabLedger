@@ -1,0 +1,49 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.6, pytest-9.2.0, pluggy-1.7.0 -- D:\数迹实验数据工坊\.venv\Scripts\python.exe
+cachedir: .cache\pytest
+rootdir: D:\数迹实验数据工坊
+plugins: anyio-4.16.0
+collecting ... collected 39 items
+
+tests/test_core.py::test_project_crud_and_times PASSED                   [  2%]
+tests/test_core.py::test_record_crud_and_persistence PASSED              [  5%]
+tests/test_core.py::test_project_isolation PASSED                        [  7%]
+tests/test_core.py::test_optimistic_lock_and_atomicity PASSED            [ 10%]
+tests/test_core.py::test_concurrent_stale_writers PASSED                 [ 12%]
+tests/test_core.py::test_invalid_name[] PASSED                           [ 15%]
+tests/test_core.py::test_invalid_name[  ] PASSED                         [ 17%]
+tests/test_core.py::test_invalid_name[name2] PASSED                      [ 20%]
+tests/test_core.py::test_schema_and_columns PASSED                       [ 23%]
+tests/test_core.py::test_csv_import[utf-8-sig] PASSED                    [ 25%]
+tests/test_core.py::test_csv_import[gb18030] PASSED                      [ 28%]
+tests/test_core.py::test_csv_invalid PASSED                              [ 30%]
+tests/test_core.py::test_exports_chinese_and_raw PASSED                  [ 33%]
+tests/test_core.py::test_quality_all_rules PASSED                        [ 35%]
+tests/test_core.py::test_iqr PASSED                                      [ 38%]
+tests/test_core.py::test_invalid_numeric[inf] PASSED                     [ 41%]
+tests/test_core.py::test_invalid_numeric[NaN] PASSED                     [ 43%]
+tests/test_core.py::test_invalid_numeric[-inf] PASSED                    [ 46%]
+tests/test_core.py::test_invalid_numeric[text] PASSED                    [ 48%]
+tests/test_core.py::test_invalid_numeric[True] PASSED                    [ 51%]
+tests/test_core.py::test_dates PASSED                                    [ 53%]
+tests/test_core.py::test_statistics PASSED                               [ 56%]
+tests/test_core.py::test_trend PASSED                                    [ 58%]
+tests/test_core.py::test_charts_and_png[\u6298\u7ebf\u56fe] PASSED       [ 61%]
+tests/test_core.py::test_charts_and_png[\u67f1\u72b6\u56fe] PASSED       [ 64%]
+tests/test_core.py::test_charts_and_png[\u6563\u70b9\u56fe] PASSED       [ 66%]
+tests/test_core.py::test_date_chart PASSED                               [ 69%]
+tests/test_core.py::test_empty_and_single PASSED                         [ 71%]
+tests/test_core.py::test_dashboard_restore_and_demo PASSED               [ 74%]
+tests/test_ui.py::test_empty_and_load_demo PASSED                        [ 76%]
+tests/test_ui.py::test_all_pages[\u6570\u636e\u8bb0\u5f55] PASSED        [ 79%]
+tests/test_ui.py::test_all_pages[\u8d28\u91cf\u4e2d\u5fc3] PASSED        [ 82%]
+tests/test_ui.py::test_all_pages[\u7edf\u8ba1\u5206\u6790] PASSED        [ 84%]
+tests/test_ui.py::test_all_pages[\u56fe\u8868\u5de5\u574a] PASSED        [ 87%]
+tests/test_ui.py::test_all_pages[\u4eea\u8868\u76d8] PASSED              [ 89%]
+tests/test_ui.py::test_all_pages[\u5bfc\u51fa\u4e2d\u5fc3] PASSED        [ 92%]
+tests/test_ui.py::test_create_project_and_rename PASSED                  [ 94%]
+tests/test_ui.py::test_record_forms_and_dashboard PASSED                 [ 97%]
+tests/test_ui.py::test_same_name_projects_remain_selected PASSED         [100%]
+
+-------------- generated xml file: D:\数迹实验数据工坊\reports\junit.xml --------------
+============================= 39 passed in 5.69s ==============================

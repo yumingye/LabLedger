@@ -1,0 +1,17 @@
+init
+run
+2026-11-12 19:05:29.208 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+Timeout (0:00:20)!
+Thread 0x00004470 (most recent call first):
+  File "D:\Lib\socket.py", line 295 in accept
+  File "D:\Lib\socket.py", line 627 in _fallback_socketpair
+  File "D:\Lib\asyncio\proactor_events.py", line 787 in _make_self_pipe
+  File "D:\Lib\asyncio\proactor_events.py", line 640 in __init__
+  File "D:\Lib\asyncio\windows_events.py", line 316 in __init__
+  File "D:\Lib\asyncio\events.py", line 720 in new_event_loop
+  File "D:\Lib\asyncio\events.py", line 823 in new_event_loop
+  File "D:\\u6570\u8ff9\u5b9e\u9a8c\u6570\u636e\u5de5\u574a\.venv\Lib\site-packages\streamlit\testing\v1\local_script_runner.py", line 68 in __init__
+  File "D:\\u6570\u8ff9\u5b9e\u9a8c\u6570\u636e\u5de5\u574a\.venv\Lib\site-packages\streamlit\testing\v1\app_test.py", line 679 in _run
+  File "D:\\u6570\u8ff9\u5b9e\u9a8c\u6570\u636e\u5de5\u574a\.venv\Lib\site-packages\streamlit\testing\v1\element_tree.py", line 4251 in run
+  File "D:\\u6570\u8ff9\u5b9e\u9a8c\u6570\u636e\u5de5\u574a\.venv\Lib\site-packages\streamlit\testing\v1\app_test.py", line 801 in run
+  File "<string>", line 1 in <module>

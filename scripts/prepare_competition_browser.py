@@ -1,0 +1,16 @@
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+s=(ROOT/'scripts/browser_v2.py').read_text(encoding='utf-8')
+s=s.replace("DB=ROOT/'data/v2_browser.sqlite3'","ROUND=os.environ.get('ITERATION','round1')\nDB=ROOT/os.environ.get('TEST_DB','data/competition_browser.sqlite3')")
+s=s.replace("URL='http://127.0.0.1:8502'","URL=os.environ.get('TEST_URL','http://127.0.0.1:8504')")
+s=s.replace("dest=ROOT/'demo/recordings'; dest.mkdir(exist_ok=True)","dest=ROOT/'final_optimization/experiments/recordings'; dest.mkdir(parents=True,exist_ok=True)")
+s=s.replace("path=str(ROOT/'screenshots'/f'v2_{name}.png')","path=str(ROOT/'final_optimization/reports'/f'{ROUND}_{name}.png')")
+s=s.replace("'竞赛演示 · 算法性能合成实验'","f'{ROUND} · 算法性能合成实验'")
+s=s.replace("def click(label):", "def multi(label,value):\n            ctl=page.get_by_test_id('stMultiSelect').filter(has=page.get_by_text(label,exact=True)).locator('input'); ctl.fill(value); page.wait_for_timeout(150); ctl.press('ArrowDown'); ctl.press('Enter'); ctl.press('Escape'); check()\n        def click(label):")
+s=s.replace("choose('处理字段','运行时间'); click('预览处理结果'); note('中位数填补", "choose('处理字段','运行时间'); multi('按实验条件分别处理','算法名称'); multi('按实验条件分别处理','输入规模'); click('预览处理结果'); note('按算法与输入规模分别进行中位数填补")
+s=s.replace("nav('智能分析');", "# FEATURE_HOOK\n        nav('智能分析');")
+s=s.replace("output=dest/('LabLedger_3min_真实浏览器演示_v2.mp4' if SPEED==1 else 'v2_preflight.mp4')", "output=ROOT/'demo/recordings/LabLedger_Competition_Final_Demo.mp4' if SPEED==1 else dest/f'{ROUND}_e2e.mp4'")
+s=s.replace("180<=duration<=220", "195<=duration<=240")
+s=s.replace("(ROOT/'reports/browser-v2.json')", "(ROOT/'final_optimization/reports'/f'browser-{ROUND}.json')")
+(ROOT/'scripts/browser_competition.py').write_text(s,encoding='utf-8')
+print('competition browser script generated')

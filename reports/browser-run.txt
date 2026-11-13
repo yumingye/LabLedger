@@ -1,0 +1,47 @@
+{
+  "url": "http://127.0.0.1:8501",
+  "browser": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+  "steps": [
+    "loaded labeled simulation with 43 rows",
+    {
+      "download": "实验_质量检查_20261112_192649.csv",
+      "bytes": 212
+    },
+    {
+      "download": "实验_趋势_20261112_192651.json",
+      "bytes": 1487
+    },
+    {
+      "download": "冷却曲线研究 · 模拟数据_实验观测结果_20261112_192653.png",
+      "bytes": 43050
+    },
+    "rendered 折线图",
+    {
+      "download": "冷却曲线研究 · 模拟数据_实验观测结果_20261112_192656.png",
+      "bytes": 22447
+    },
+    "rendered 柱状图",
+    {
+      "download": "冷却曲线研究 · 模拟数据_实验观测结果_20261112_192658.png",
+      "bytes": 23436
+    },
+    "rendered 散点图",
+    "dashboard layout survives browser reload",
+    {
+      "download": "冷却曲线研究 · 模拟数据_数据_20261112_192705.csv",
+      "bytes": 3005
+    },
+    {
+      "download": "冷却曲线研究 · 模拟数据_原始数据_20261112_192706.json",
+      "bytes": 8708
+    },
+    {
+      "download": "冷却曲线研究 · 模拟数据_统计_20261112_192706.csv",
+      "bytes": 296
+    },
+    "real CSV upload, append and persistence: 43 -> 44",
+    "44 rows recovered after browser reload"
+  ],
+  "page_errors": [],
+  "video": "demo\\recordings\\page@f08750c03c13fd45fea28bfcffe102cc.webm"
+}

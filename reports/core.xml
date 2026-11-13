@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="28" time="2.735" timestamp="2026-11-12T19:03:49.421137+08:00" hostname="LAPTOP-JHL9LGMU"><testcase classname="tests.test_core" name="test_project_crud_and_times" time="0.031" /><testcase classname="tests.test_core" name="test_record_crud_and_persistence" time="0.810" /><testcase classname="tests.test_core" name="test_project_isolation" time="0.039" /><testcase classname="tests.test_core" name="test_optimistic_lock_and_atomicity" time="0.026" /><testcase classname="tests.test_core" name="test_invalid_name[]" time="0.020" /><testcase classname="tests.test_core" name="test_invalid_name[  ]" time="0.019" /><testcase classname="tests.test_core" name="test_invalid_name[name2]" time="0.020" /><testcase classname="tests.test_core" name="test_schema_and_columns" time="0.020" /><testcase classname="tests.test_core" name="test_csv_import[utf-8-sig]" time="0.005" /><testcase classname="tests.test_core" name="test_csv_import[gb18030]" time="0.003" /><testcase classname="tests.test_core" name="test_csv_invalid" time="0.000" /><testcase classname="tests.test_core" name="test_exports_chinese_and_raw" time="0.001" /><testcase classname="tests.test_core" name="test_quality_all_rules" time="0.002" /><testcase classname="tests.test_core" name="test_iqr" time="0.001" /><testcase classname="tests.test_core" name="test_invalid_numeric[inf]" time="0.000" /><testcase classname="tests.test_core" name="test_invalid_numeric[NaN]" time="0.000" /><testcase classname="tests.test_core" name="test_invalid_numeric[-inf]" time="0.000" /><testcase classname="tests.test_core" name="test_invalid_numeric[text]" time="0.000" /><testcase classname="tests.test_core" name="test_invalid_numeric[True]" time="0.000" /><testcase classname="tests.test_core" name="test_dates" time="0.000" /><testcase classname="tests.test_core" name="test_statistics" time="0.003" /><testcase classname="tests.test_core" name="test_trend" time="0.003" /><testcase classname="tests.test_core" name="test_charts_and_png[\u6298\u7ebf\u56fe]" time="0.473" /><testcase classname="tests.test_core" name="test_charts_and_png[\u67f1\u72b6\u56fe]" time="0.066" /><testcase classname="tests.test_core" name="test_charts_and_png[\u6563\u70b9\u56fe]" time="0.116" /><testcase classname="tests.test_core" name="test_date_chart" time="0.128" /><testcase classname="tests.test_core" name="test_empty_and_single" time="0.049"><failure message="AssertionError: assert (Scatter({\n    'hovertemplate': '时间=%{x}&lt;br&gt;测量=%{y}&lt;extra&gt;&lt;/extra&gt;',\n    'legendgroup': '',\n    'line': {'color': '#0e9285', 'dash': 'solid'},\n    'marker': {'symbol': 'circle'},\n    'mode': 'lines+markers',\n    'name': '',\n    'orientation': 'v',\n    'showlegend': False,\n    'x': array([], dtype=object),\n    'xaxis': 'x',\n    'y': array([], dtype=int64),\n    'yaxis': 'y'\n}),) == ()&#10;  &#10;[+20 more lines; full report in element text]">fields = [{'name': '时间', 'type': '数字', 'min': 0, 'max': 100}, {'name': '测量', 'type': '数字'}, {'name': '组', 'type': '文本'}, {'name': '日期', 'type': '日期'}]
+
+    def test_empty_and_single(fields):
+        empty=sample().iloc[:0]
+        assert quality(empty,fields)['completeness']==0
+        assert len(statistics(empty,fields))==2
+&gt;       assert plot(empty,ChartConfig('时间','测量')).data==()
+E       AssertionError: assert (Scatter({\n    'hovertemplate': '时间=%{x}&lt;br&gt;测量=%{y}&lt;extra&gt;&lt;/extra&gt;',\n    'legendgroup': '',\n    'line': {'color': '#0e9285', 'dash': 'solid'},\n    'marker': {'symbol': 'circle'},\n    'mode': 'lines+markers',\n    'name': '',\n    'orientation': 'v',\n    'showlegend': False,\n    'x': array([], dtype=object),\n    'xaxis': 'x',\n    'y': array([], dtype=int64),\n    'yaxis': 'y'\n}),) == ()
+E         
+E         Left contains one more item: Scatter({\n    'hovertemplate': '时间=%{x}&lt;br&gt;测量=%{y}&lt;extra&gt;&lt;/extra&gt;',\n    'legendgroup': '',\n    'line': {'color': '#0e9...egend': False,\n    'x': array([], dtype=object),\n    'xaxis': 'x',\n    'y': array([], dtype=int64),\n    'yaxis': 'y'\n})
+E         
+E         Full diff: (-: missing in left side, +: extra in left side)
+E         - ()
+E         + (
+E         +     Scatter({
+E         +     'hovertemplate': '时间=%{x}&lt;br&gt;测量=%{y}&lt;extra&gt;&lt;/extra&gt;',
+E         +     'legendgroup': '',
+E         +     'line': {'color': '#0e9285', 'dash': 'solid'},
+E         +     'marker': {'symbol': 'circle'},
+E         +     'mode': 'lines+markers',
+E         +     'name': '',
+E         +     'orientation': 'v',
+E         +     'showlegend': False,
+E         +     'x': array([], dtype=object),
+E         +     'xaxis': 'x',
+E         +     'y': array([], dtype=int64),
+E         +     'yaxis': 'y'
+E         + }),
+E         + )
+
+tests\test_core.py:140: AssertionError</failure></testcase><testcase classname="tests.test_core" name="test_dashboard_restore_and_demo" time="0.051" /></testsuite></testsuites>

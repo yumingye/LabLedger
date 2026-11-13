@@ -1,0 +1,10 @@
+The bundle contains these 6 refs:
+65f1206b754844ba086951685ce0ad92144e814e refs/codex/turn-diffs/checkpoints/1663e1d70151f07702630a7834b24a8c/7ac3ba9ee16e07e2c51af58f52507298/1794491166208/a4747c2c-a98f-4f1e-9bc0-73e791d0ca99
+e76020aab1b9d1c3158a30670ccedff7abc9f57e refs/heads/codex/competition-final
+cf9bd26b90fff77eb22e19f0cf3ad476389e3cc4 refs/heads/codex/labledger-v2
+4c44bf5856a36868f3778491f36c80b8c17a5b9f refs/heads/main
+cf9bd26b90fff77eb22e19f0cf3ad476389e3cc4 refs/tags/labledger-v2-frozen
+e76020aab1b9d1c3158a30670ccedff7abc9f57e HEAD
+The bundle records a complete history.
+The bundle uses this hash algorithm: sha1
+交付成果/LabLedger_PreRelease_20261113.bundle is okay

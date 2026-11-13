@@ -1,0 +1,131 @@
+{
+  "files": 235,
+  "commits_including_tool_refs": 6,
+  "current_sensitive_hits": [],
+  "history_blob_hits": [],
+  "readme_links": [
+    {
+      "label": "yumingye/LabLedger",
+      "target": "https://github.com/yumingye/LabLedger",
+      "status": "BLOCKED",
+      "error": "<urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)>"
+    },
+    {
+      "label": "本轮验收报告",
+      "target": "docs/FINAL_ACCEPTANCE_REPORT.md",
+      "status": "PASS"
+    },
+    {
+      "label": "最终浏览器演示 MP4：211.32 秒",
+      "target": "demo/recordings/LabLedger_Competition_Final_Demo.mp4",
+      "status": "PASS"
+    },
+    {
+      "label": "实验数字档案",
+      "target": "final_optimization/reports/final-demo_10a_dossier.png",
+      "status": "PASS"
+    },
+    {
+      "label": "demo/templates",
+      "target": "demo/templates",
+      "status": "PASS"
+    },
+    {
+      "label": "最终架构与数据流",
+      "target": "docs/FINAL_ARCHITECTURE.md",
+      "status": "PASS"
+    },
+    {
+      "label": "数据库设计与迁移",
+      "target": "docs/ARCHITECTURE.md",
+      "status": "PASS"
+    },
+    {
+      "label": "开发文档",
+      "target": "docs/DEVELOPMENT.md",
+      "status": "PASS"
+    },
+    {
+      "label": "本地界面",
+      "target": "http://127.0.0.1:8501",
+      "status": "NOT APPLICABLE",
+      "scope": "documented local address, startup verified separately"
+    },
+    {
+      "label": "使用教程及异常处理",
+      "target": "docs/USER_GUIDE.md",
+      "status": "PASS"
+    },
+    {
+      "label": "原始输出",
+      "target": "reports/final-release-20261113/tests-rerun.txt",
+      "status": "PASS"
+    },
+    {
+      "label": "JUnit",
+      "target": "reports/final-release-20261113/tests-rerun.xml",
+      "status": "PASS"
+    },
+    {
+      "label": "最终验收",
+      "target": "docs/FINAL_ACCEPTANCE_REPORT.md",
+      "status": "PASS"
+    },
+    {
+      "label": "最终文件清单",
+      "target": "docs/FINAL_REPOSITORY_MANIFEST.md",
+      "status": "PASS"
+    },
+    {
+      "label": "SHA256 清单",
+      "target": "docs/FINAL_RELEASE_SHA256.txt",
+      "status": "PASS"
+    },
+    {
+      "label": "本轮审计",
+      "target": "docs/FINAL_RELEASE_AUDIT.md",
+      "status": "PASS"
+    },
+    {
+      "label": "源码授权",
+      "target": "LICENSE_NOTICE.md",
+      "status": "PASS"
+    },
+    {
+      "label": "第三方来源与许可",
+      "target": "docs/THIRD_PARTY_NOTICES.md",
+      "status": "PASS"
+    },
+    {
+      "label": "完整依赖许可",
+      "target": "reports/licenses.json",
+      "status": "PASS"
+    },
+    {
+      "label": "SciPy 许可",
+      "target": "docs/SCIPY_LICENSE.txt",
+      "status": "PASS"
+    },
+    {
+      "label": "最终 AI 声明",
+      "target": "docs/FINAL_AI_USAGE.md",
+      "status": "PASS"
+    },
+    {
+      "label": "团队分工",
+      "target": "docs/TEAM_CONTRIBUTIONS.md",
+      "status": "PASS"
+    },
+    {
+      "label": "隐私审计",
+      "target": "docs/PUBLIC_HISTORY_PRIVACY_AUDIT.md",
+      "status": "PASS"
+    },
+    {
+      "label": "2.1 发布说明",
+      "target": "docs/FINAL_RELEASE_NOTES.md",
+      "status": "PASS"
+    }
+  ],
+  "scope": "Pattern scan of candidate text and all reachable historical text blobs. Binary media require visual review; not a complete vulnerability audit."
+}

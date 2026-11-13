@@ -1,0 +1,62 @@
+[
+  {
+    "page": "总览",
+    "status": "PASS"
+  },
+  {
+    "page": "数据记录",
+    "status": "PASS"
+  },
+  {
+    "page": "质量中心",
+    "status": "PASS"
+  },
+  {
+    "page": "统计分析",
+    "status": "PASS"
+  },
+  {
+    "page": "图表工坊",
+    "status": "PASS"
+  },
+  {
+    "page": "仪表盘",
+    "status": "PASS"
+  },
+  {
+    "page": "导出中心",
+    "status": "PASS"
+  },
+  {
+    "page": "实验详情",
+    "status": "PASS"
+  },
+  {
+    "page": "数据清洗",
+    "status": "PASS"
+  },
+  {
+    "page": "专业统计",
+    "status": "PASS"
+  },
+  {
+    "page": "实验对比",
+    "status": "PASS"
+  },
+  {
+    "page": "高级图表",
+    "status": "PASS"
+  },
+  {
+    "page": "智能分析",
+    "status": "PASS"
+  },
+  {
+    "page": "报告中心",
+    "status": "PASS"
+  },
+  {
+    "page": "系统设置",
+    "status": "PASS"
+  }
+]

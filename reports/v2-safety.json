@@ -1,0 +1,22 @@
+{
+  "original_artifacts_preserved": {
+    "LabLedger_Final_Submission.zip": "9c8b7c40bdeb57f4998cec4508247cc8a7ef20f07d08221a26cb1cfdfc1d0388",
+    "LabLedger_真实浏览器演示.mp4": "60aec7b02f3405022b10b0dc0301986845a44ef081abaabf5847175a733d1170",
+    "SHA256SUMS.txt": "1927fd1afc55a6bf8c1d038a60c5f2524aeed783cc9bc0b53969d7caa25fbce3"
+  },
+  "original_zip_checksum": "PASS",
+  "sql": "parameterized values; fixed table identifiers",
+  "csv_formula_guard": "original tests preserved",
+  "file_limits": "20MB CSV/project/database upload",
+  "report_html": "html.escape for user text",
+  "derived_fields": "explicit arithmetic, no eval",
+  "runtime": {
+    "TEMP": "D:\\数迹实验数据工坊\\.runtime\\tmp",
+    "TMP": "D:\\数迹实验数据工坊\\.runtime\\tmp",
+    "MPLCONFIGDIR": "D:\\数迹实验数据工坊\\.runtime\\matplotlib",
+    "PIP_CACHE_DIR": "D:\\数迹实验数据工坊\\.cache\\pip",
+    "PLAYWRIGHT_BROWSERS_PATH": "D:\\数迹实验数据工坊\\.runtime\\browsers",
+    "PYTHONPYCACHEPREFIX": "D:\\数迹实验数据工坊\\.cache\\pycache"
+  },
+  "limits": "No OS-wide disk audit; OS event logs and installed tool binaries are outside app control. No remote model calls. No user database packaged."
+}

@@ -1,0 +1,73 @@
+{
+  "phase": "V2 frozen before competition optimization",
+  "tests": 86,
+  "original_tests": 39,
+  "new_tests": 47,
+  "browser": {
+    "steps": [
+      "created experiment, schema, CSV upload 121 rows",
+      "deduplicate, median fill, IQR mark, retained original version",
+      "statistics regression snapshot",
+      "stratified algorithm comparison saved",
+      "line box heatmap, PNG SVG HTML downloads",
+      "report generated and five export formats downloaded",
+      "real process stop/start, 120 rows and history restored"
+    ],
+    "downloads": [
+      {
+        "name": "LabLedger_chart.png",
+        "bytes": 23214
+      },
+      {
+        "name": "LabLedger_chart.svg",
+        "bytes": 41420
+      },
+      {
+        "name": "LabLedger_chart.html",
+        "bytes": 4860227
+      },
+      {
+        "name": "LabLedger_report.html",
+        "bytes": 242400
+      },
+      {
+        "name": "LabLedger_report.md",
+        "bytes": 139895
+      },
+      {
+        "name": "LabLedger_report.zip",
+        "bytes": 70926
+      },
+      {
+        "name": "LabLedger_data.csv",
+        "bytes": 9839
+      },
+      {
+        "name": "summary.png",
+        "bytes": 18940
+      },
+      {
+        "name": "LabLedger_backup.sqlite3",
+        "bytes": 999424
+      },
+      {
+        "name": "LabLedger_project.json",
+        "bytes": 157063
+      }
+    ],
+    "url": "http://127.0.0.1:8502",
+    "restart": "PASS",
+    "page_errors": [],
+    "elapsed_seconds": 196.53,
+    "video": "D:\\数迹实验数据工坊\\demo\\recordings\\LabLedger_3min_真实浏览器演示_v2.mp4",
+    "duration": 196.8,
+    "status": "PASS"
+  },
+  "next": "Audit V2 release first; then serial three-round competition optimization. Preserve V1 and V2 release artifacts.",
+  "known_limits": [
+    "No Ollama/PDF",
+    "chart snapshot editor restoration partial",
+    "single user local tool",
+    "human competition eligibility/license approval pending"
+  ]
+}

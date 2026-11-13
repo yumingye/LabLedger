@@ -1,0 +1,16 @@
+{
+  "root": "D:\\数迹实验数据工坊",
+  "bytes_by_directory": {
+    ".venv": 500653941,
+    ".cache": 289307202,
+    ".runtime": 325020118,
+    "data": 53248,
+    "exports": 254771,
+    "logs": 474,
+    "reports": 447585,
+    "screenshots": 1944235,
+    "demo": 13100615
+  },
+  "known_project_files_outside_root": [],
+  "audit_scope": "Project-controlled paths and configured environment; not OS-wide syscall tracing"
+}

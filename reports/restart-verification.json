@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "database": "D:\\数迹实验数据工坊\\data\\labledger.sqlite3",
+  "project_id": 1,
+  "checks": [
+    {
+      "run": 1,
+      "pid": 23812,
+      "rows": 44,
+      "dashboard_columns": 3,
+      "health": 200
+    },
+    {
+      "run": 2,
+      "pid": 45556,
+      "rows": 44,
+      "dashboard_columns": 3,
+      "health": 200
+    }
+  ]
+}

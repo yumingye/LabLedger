@@ -1,0 +1,39 @@
+{
+  "status": "FAIL",
+  "root": "D:\\数迹实验数据工坊\\final_optimization\\releases\\public_20261113",
+  "python": "D:\\数迹实验数据工坊\\final_optimization\\releases\\public_20261113\\.venv\\Scripts\\python.exe",
+  "steps": [
+    {
+      "step": "pip-check",
+      "status": "PASS",
+      "command": [
+        "D:\\数迹实验数据工坊\\final_optimization\\releases\\public_20261113\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ]
+    },
+    {
+      "step": "tests",
+      "status": "PASS",
+      "command": [
+        "D:\\数迹实验数据工坊\\final_optimization\\releases\\public_20261113\\.venv\\Scripts\\python.exe",
+        "-u",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp=.runtime/fresh-pytest",
+        "-o",
+        "cache_dir=.cache/fresh-pytest",
+        "--junitxml=reports/fresh-verification/tests.xml"
+      ]
+    },
+    {
+      "step": "startup-health",
+      "status": "PASS",
+      "pid": 19304
+    }
+  ],
+  "scope": "same Windows machine, fresh directory/venv/data/config/cache",
+  "error": "AssertionError(('browser-full-flow', 1))"
+}

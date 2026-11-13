@@ -1,0 +1,153 @@
+..F..................................................................... [ 80%]
+.................                                                        [100%]
+================================== FAILURES ===================================
+__________________ test_report_staleness_and_unique_archives __________________
+
+self = SessionState(_old_state={'$$STREAMLIT_INTERNAL_KEY_TESTING': {'$$ID-97aefe38b48279ea511f810584b12046-active_project': ...ams={}), _persist_tracker=PersistedWidgetTracker(_scopes={}, _widget_pages={}, _value_pages={}, _pending_resets=set()))
+key = 'filtered_state'
+
+    def __getitem__(self, key: str) -> Any:
+        wid_key_map = self._key_id_mapper.id_key_mapping
+        widget_id = self._get_widget_id(key)
+    
+        if widget_id in wid_key_map and widget_id == key:
+            # the "key" is a raw widget id, so get its associated user key for lookup
+            key = wid_key_map[widget_id]
+        try:
+>           base_value = self._getitem(widget_id, key)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.venv\Lib\site-packages\streamlit\runtime\state\session_state.py:776: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = SessionState(_old_state={'$$STREAMLIT_INTERNAL_KEY_TESTING': {'$$ID-97aefe38b48279ea511f810584b12046-active_project': ...ams={}), _persist_tracker=PersistedWidgetTracker(_scopes={}, _widget_pages={}, _value_pages={}, _pending_resets=set()))
+widget_id = 'filtered_state', user_key = 'filtered_state'
+
+    def _getitem(self, widget_id: str | None, user_key: str | None) -> Any:
+        """Get the value of an entry in Session State, using either the
+        user-provided key or a widget id as appropriate for the internal dict
+        being accessed.
+    
+        At least one of the arguments must have a value.
+        """
+        if user_key is None and widget_id is None:  # pragma: no cover - defensive
+            raise ValueError(
+                "user_key and widget_id cannot both be None. This should never happen."
+            )
+    
+        if user_key is not None:
+            try:
+                return self._new_session_state[user_key]
+            except KeyError:
+                pass
+    
+        if widget_id is not None:
+            try:
+                return self._new_widget_state[widget_id]
+            except KeyError:
+                pass
+    
+        # Typically, there won't be both a widget id and an associated state key in
+        # old state at the same time, so the order we check is arbitrary.
+        # The exception is if session state is set and then a later run has
+        # a widget created, so the widget id entry should be newer.
+        # The opposite case shouldn't happen, because setting the value of a widget
+        # through session state will result in the next widget state reflecting that
+        # value.
+        if widget_id is not None:
+            try:
+                return self._old_state[widget_id]
+            except KeyError:
+                pass
+    
+        if user_key is not None:
+            try:
+                return self._old_state[user_key]
+            except KeyError:
+                pass
+    
+        # We'll never get here
+>       raise KeyError
+E       KeyError
+
+.venv\Lib\site-packages\streamlit\runtime\state\session_state.py:829: KeyError
+
+During handling of the above exception, another exception occurred:
+
+self = {'page': '报告中心', 'fields_1': {'edited_rows': {}, 'added_rows': [], 'deleted_rows': []}, 'active_project': 1, 'FormSubm...late_字段说明.md': False, 'template_算法性能示例.csv': False, 'template_化学实验示例.csv': False, 'FormSubmitter:rename_1-保存名称': False}
+key = 'filtered_state'
+
+    def __getattr__(self, key: str) -> Any:
+        try:
+>           return self[key]
+                   ^^^^^^^^^
+
+.venv\Lib\site-packages\streamlit\testing\v1\app_test.py:307: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+.venv\Lib\site-packages\streamlit\testing\v1\app_test.py:292: in __getitem__
+    return self._state[key]
+           ^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\streamlit\runtime\state\safe_session_state.py:123: in __getitem__
+    return self._state[key]
+           ^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = SessionState(_old_state={'$$STREAMLIT_INTERNAL_KEY_TESTING': {'$$ID-97aefe38b48279ea511f810584b12046-active_project': ...ams={}), _persist_tracker=PersistedWidgetTracker(_scopes={}, _widget_pages={}, _value_pages={}, _pending_resets=set()))
+key = 'filtered_state'
+
+    def __getitem__(self, key: str) -> Any:
+        wid_key_map = self._key_id_mapper.id_key_mapping
+        widget_id = self._get_widget_id(key)
+    
+        if widget_id in wid_key_map and widget_id == key:
+            # the "key" is a raw widget id, so get its associated user key for lookup
+            key = wid_key_map[widget_id]
+        try:
+            base_value = self._getitem(widget_id, key)
+            return (
+                apply_presenter(self, widget_id, base_value)
+                if widget_id is not None
+                else base_value
+            )
+        except KeyError:
+>           raise KeyError(_missing_key_error_message(key))
+E           KeyError: 'st.session_state has no key "filtered_state". Did you forget to initialize it? More info: https://docs.streamlit.io/develop/concepts/architecture/session-state#initialization'
+
+.venv\Lib\site-packages\streamlit\runtime\state\session_state.py:783: KeyError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = WindowsPath('D:/数迹实验数据工坊/.runtime/competition-r1/test_report_staleness_and_uniq0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F59D207C80>
+
+    def test_report_staleness_and_unique_archives(tmp_path,monkeypatch):
+        path=tmp_path/'db.sqlite3'; monkeypatch.setenv('LABLEDGER_DB',str(path)); s=Store(path); p=load_algorithm_demo(s); d=s.datasets(p)[0]['id']
+        app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/'app.py'),default_timeout=30).run(); app.radio(key='page').set_value('报告中心').run()
+        def generate(): next(b for b in app.button if b.label=='生成完整实验报告').click().run()
+        generate(); generate(); records=[json.loads(r['payload'])['file'] for r in s.history(p) if r['kind']=='报告导出']
+        assert len(set(records))==2
+        frame=s.frame(p,d); s.save_frame(p,d,frame.iloc[:10]); app.run()
+>       assert f'report_{p}_{d}' not in app.session_state.filtered_state
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_competition_core.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = {'page': '报告中心', 'fields_1': {'edited_rows': {}, 'added_rows': [], 'deleted_rows': []}, 'active_project': 1, 'FormSubm...late_字段说明.md': False, 'template_算法性能示例.csv': False, 'template_化学实验示例.csv': False, 'FormSubmitter:rename_1-保存名称': False}
+key = 'filtered_state'
+
+    def __getattr__(self, key: str) -> Any:
+        try:
+            return self[key]
+        except KeyError:
+>           raise AttributeError(f"{key} not found in session_state.")
+E           AttributeError: filtered_state not found in session_state.
+
+.venv\Lib\site-packages\streamlit\testing\v1\app_test.py:309: AttributeError
+---------------------------- Captured stderr call -----------------------------
+2026-11-12 20:39:21.519 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+------------------------------ Captured log call ------------------------------
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:522 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+=========================== short test summary info ===========================
+FAILED tests/test_competition_core.py::test_report_staleness_and_unique_archives
+1 failed, 88 passed in 12.89s

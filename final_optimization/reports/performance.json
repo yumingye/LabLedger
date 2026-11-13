@@ -1,0 +1,16 @@
+{
+  "rows": 10000,
+  "seed": 77,
+  "seconds": {
+    "describe": 0.003904199998942204,
+    "conditional_cleaning": 0.0036687999963760376,
+    "save_with_version": 0.03612589999102056,
+    "sql_counts": 0.0022705000010319054
+  },
+  "counts": {
+    "projects": 1,
+    "datasets": 1,
+    "records": 10000
+  },
+  "scope": "one warm local run, not a throughput guarantee or stress test"
+}

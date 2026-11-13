@@ -1,0 +1,4 @@
+# Keep published SHA256 valid across Git autocrlf settings and platforms.
+* -text
+*.png binary
+*.mp4 binary

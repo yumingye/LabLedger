@@ -1,0 +1,60 @@
+{
+  "steps": [
+    "created experiment, schema, CSV upload 121 rows",
+    "deduplicate, median fill, IQR mark, retained original version",
+    "statistics regression snapshot",
+    "stratified algorithm comparison saved",
+    "line box heatmap, PNG SVG HTML downloads",
+    "report generated and five export formats downloaded",
+    "real process stop/start, 120 rows and history restored"
+  ],
+  "downloads": [
+    {
+      "name": "LabLedger_chart.png",
+      "bytes": 33975
+    },
+    {
+      "name": "LabLedger_chart.svg",
+      "bytes": 41420
+    },
+    {
+      "name": "LabLedger_chart.html",
+      "bytes": 4863872
+    },
+    {
+      "name": "LabLedger_report.html",
+      "bytes": 58988
+    },
+    {
+      "name": "LabLedger_report.md",
+      "bytes": 27363
+    },
+    {
+      "name": "LabLedger_report.zip",
+      "bytes": 57501
+    },
+    {
+      "name": "LabLedger_data.csv",
+      "bytes": 9789
+    },
+    {
+      "name": "summary.png",
+      "bytes": 18940
+    },
+    {
+      "name": "LabLedger_backup.sqlite3",
+      "bytes": 237568
+    },
+    {
+      "name": "LabLedger_project.json",
+      "bytes": 157071
+    }
+  ],
+  "url": "http://127.0.0.1:8504",
+  "restart": "PASS",
+  "page_errors": [],
+  "elapsed_seconds": 44.27,
+  "video": "D:\\数迹实验数据工坊\\final_optimization\\experiments\\recordings\\round1_e2e.mp4",
+  "duration": 44.64,
+  "status": "PARTIAL"
+}
