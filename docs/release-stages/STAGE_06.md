@@ -1,7 +1,7 @@
-# 阶段 06：远程上传和独立验收
+# 阶段 06 验收
 
-日期：2026-11-13。状态：PENDING
+日期：2026-11-13。状态：PASS
 
-唯一公开仓库已核实，原历史备份校验通过；未通过本地准入前不推送。
+阶段6：前五阶段本地准入通过后正常推送唯一公开main；从GitHub真实Clone到D盘新目录，联网独立安装和下载浏览器，114项测试、核心9步、12下载、备份恢复/重启均通过。
 
-依据：FINAL_REPOSITORY_TASK_QUEUE.md。此阶段在前一阶段验收后串行接续；当前检查点不表示后续阶段已经执行。具体命令、结果与证据见 FINAL_ACCEPTANCE_REPORT.md。
+实际命令与证据：FINAL_ACCEPTANCE_REPORT.md 的 G9—G13；reports/final-release-20261113/remote/result.json、public-access.json、product-reproduction.json。未执行强推、未改写原历史。

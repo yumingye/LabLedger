@@ -2,8 +2,6 @@
 
 日期：2026-11-13。状态：PASS
 
-README、视频白名单、文档、评审许可及隐私方案已整理；最终目录与哈希待冻结。
+阶段4通过后整理源码、README、视频白名单、开发/架构/数据库/使用文档、测试、团队及AI声明、第三方许可和用户批准的竞赛限定源码许可。原始历史Bundle本地完整保存并校验，用户批准干净公开历史。
 
-依据：FINAL_REPOSITORY_TASK_QUEUE.md。此阶段在前一阶段验收后串行接续；当前检查点不表示后续阶段已经执行。具体命令、结果与证据见 FINAL_ACCEPTANCE_REPORT.md。
-
-本轮补充：独立候选联网安装、114项测试、9步/12下载/恢复与重启均PASS。源码、文档和正式视频准备齐全；SHA256在公开提交前实际核验。证据reports/final-release-20261113/rehearsal/。阶段6仅在本地准入通过后开始。
+命令：scripts/release_inventory.py --seal，候选及历史文本敏感模式0命中、README仓库链接0失效，逐文件SHA256实际验证；暂存集合严格等于哈希清单加清单自身，排除环境/数据库/缓存和个人身份原文。证据inventory-check.json、bundle-verification.txt、FINAL_REPOSITORY_MANIFEST.md、FINAL_RELEASE_SHA256.txt及PUBLIC_HISTORY_PRIVACY_AUDIT.md。

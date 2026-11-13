@@ -1,0 +1,14 @@
+[
+  {
+    "path": "交付成果/LabLedger_V2_Final_Submission.zip",
+    "bytes": 8637156,
+    "sha256": "e7fed2136ac5fe8cfd3b352944e4000442e7ea9fc79ae67745995249727e2892",
+    "CRC": "PASS"
+  },
+  {
+    "path": "交付成果/LabLedger_Competition_Final.zip",
+    "bytes": 19155395,
+    "sha256": "bf30dd38e9238d07851d413462f1f132edeb1efb1d665625ebb49ea6c32f305e",
+    "CRC": "PASS"
+  }
+]

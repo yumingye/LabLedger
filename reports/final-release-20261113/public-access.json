@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "authentication": "none; no Authorization header or cookies",
+  "checks": [
+    {
+      "url": "https://github.com/yumingye/LabLedger",
+      "status": "PASS",
+      "http": 200,
+      "visibility": "public",
+      "default_branch": "main"
+    },
+    {
+      "url": "https://github.com/yumingye/LabLedger",
+      "status": "PASS",
+      "http": 200,
+      "readme_html": "PASS"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/yumingye/LabLedger/main/README.md",
+      "status": "PASS",
+      "http": 200,
+      "bytes": 8753,
+      "sha256": "f01df2e8e8d708b37e445df4447b930c926ebaab772223de6cd24b1a71b6e828",
+      "mime": "text/plain; charset=utf-8"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/yumingye/LabLedger/main/docs/FINAL_ACCEPTANCE_REPORT.md",
+      "status": "PASS",
+      "http": 200,
+      "bytes": 2894,
+      "sha256": "b824eefb93be15b5724ca51dd43c363fc79ae250a9852348571485f4c3bc06b7",
+      "mime": "text/plain; charset=utf-8"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/yumingye/LabLedger/main/demo/recordings/LabLedger_Competition_Final_Demo.mp4",
+      "status": "PASS",
+      "http": 200,
+      "bytes": 7833128,
+      "sha256": "f7d8b04ba1c968b9195faf80c246db9427ad601892b7bae7f8411cbad9c57f7e",
+      "mime": "application/octet-stream"
+    }
+  ]
+}

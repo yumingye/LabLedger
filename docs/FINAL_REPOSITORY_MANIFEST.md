@@ -1,13 +1,13 @@
 # 最终仓库文件清单
 
-235 个可分发文件；排除 .git、原始身份快照、数据库、缓存、运行环境和本地历史 Bundle。
+255 个可分发文件；排除 .git、原始身份快照、数据库、缓存、运行环境和本地历史 Bundle。
 
 公开历史依用户授权从干净发布快照开始；原始历史本地保留。
 
 | 路径 | 字节数 |
 |---|---:|
 | .gitattributes | 108 |
-| .gitignore | 837 |
+| .gitignore | 977 |
 | .streamlit/config.toml | 241 |
 | LICENSE_NOTICE.md | 975 |
 | README.md | 8753 |
@@ -24,14 +24,14 @@
 | docs/ARCHITECTURE.md | 3726 |
 | docs/DEMO_SCRIPT_V2.md | 1354 |
 | docs/DEVELOPMENT.md | 1875 |
-| docs/FINAL_ACCEPTANCE_REPORT.md | 2894 |
+| docs/FINAL_ACCEPTANCE_REPORT.md | 5584 |
 | docs/FINAL_AI_USAGE.md | 1369 |
 | docs/FINAL_ARCHITECTURE.md | 1924 |
-| docs/FINAL_RELEASE_AUDIT.md | 3867 |
+| docs/FINAL_RELEASE_AUDIT.md | 4360 |
 | docs/FINAL_RELEASE_NOTES.md | 1358 |
 | docs/FINAL_RELEASE_SHA256.txt | 自身/哈希清单不计固定字节数 |
 | docs/FINAL_REPOSITORY_MANIFEST.md | 自身/哈希清单不计固定字节数 |
-| docs/FINAL_REPOSITORY_TASK_QUEUE.md | 8156 |
+| docs/FINAL_REPOSITORY_TASK_QUEUE.md | 8668 |
 | docs/FINAL_SUBMISSION_REPORT.md | 1727 |
 | docs/FINAL_TEST_REPORT.md | 3058 |
 | docs/GIT_DELIVERY.md | 1750 |
@@ -46,10 +46,10 @@
 | docs/release-stages/STAGE_01.md | 409 |
 | docs/release-stages/STAGE_02.md | 442 |
 | docs/release-stages/STAGE_03.md | 447 |
-| docs/release-stages/STAGE_04.md | 697 |
-| docs/release-stages/STAGE_05.md | 676 |
-| docs/release-stages/STAGE_06.md | 393 |
-| docs/release-stages/STAGE_07.md | 338 |
+| docs/release-stages/STAGE_04.md | 652 |
+| docs/release-stages/STAGE_05.md | 756 |
+| docs/release-stages/STAGE_06.md | 495 |
+| docs/release-stages/STAGE_07.md | 406 |
 | final_optimization/reports/01_竞赛视角独立评估.md | 4080 |
 | final_optimization/reports/02_第一轮迭代.md | 1393 |
 | final_optimization/reports/03_第二轮迭代.md | 1870 |
@@ -157,9 +157,13 @@
 | reports/final-release-20261113/ancestry.txt | 20 |
 | reports/final-release-20261113/bundle-verification.txt | 696 |
 | reports/final-release-20261113/git-fsck.txt | 0 |
-| reports/final-release-20261113/inventory-check.json | 3532 |
+| reports/final-release-20261113/inventory-check.json | 3426 |
 | reports/final-release-20261113/inventory-initial.json | 3453 |
+| reports/final-release-20261113/original-tests-unchanged.txt | 13 |
+| reports/final-release-20261113/preserved-artifacts.json | 400 |
+| reports/final-release-20261113/product-reproduction.json | 1981 |
 | reports/final-release-20261113/product-unchanged.txt | 21 |
+| reports/final-release-20261113/public-access.json | 1383 |
 | reports/final-release-20261113/rehearsal-edge-failure/browser-full-flow.txt | 7383 |
 | reports/final-release-20261113/rehearsal-edge-failure/pip-check.txt | 31 |
 | reports/final-release-20261113/rehearsal-edge-failure/result.json | 1173 |
@@ -175,9 +179,25 @@
 | reports/final-release-20261113/rehearsal/service.txt | 158 |
 | reports/final-release-20261113/rehearsal/tests.txt | 184 |
 | reports/final-release-20261113/rehearsal/tests.xml | 11273 |
+| reports/final-release-20261113/remote-clone.txt | 97 |
+| reports/final-release-20261113/remote-tested-commit.txt | 41 |
+| reports/final-release-20261113/remote-video-decode.txt | 0 |
+| reports/final-release-20261113/remote-video-status.txt | 22 |
+| reports/final-release-20261113/remote/browser-full-flow.txt | 1832 |
+| reports/final-release-20261113/remote/clone-hash-verification.txt | 30 |
+| reports/final-release-20261113/remote/pip-check.txt | 31 |
+| reports/final-release-20261113/remote/remote-browser-install.txt | 8834 |
+| reports/final-release-20261113/remote/remote-fresh-install-retry.txt | 13456 |
+| reports/final-release-20261113/remote/remote-fresh-install.txt | 2652 |
+| reports/final-release-20261113/remote/remote-verifier-output.txt | 3558 |
+| reports/final-release-20261113/remote/result.json | 3556 |
+| reports/final-release-20261113/remote/service.txt | 158 |
+| reports/final-release-20261113/remote/tests.txt | 184 |
+| reports/final-release-20261113/remote/tests.xml | 11274 |
 | reports/final-release-20261113/tests-rerun.txt | 184 |
 | reports/final-release-20261113/tests-rerun.xml | 11273 |
 | reports/final-release-20261113/tests.txt | 0 |
+| reports/final-release-20261113/verify_public_access.py | 1991 |
 | reports/final-release-20261113/video-decode.txt | 0 |
 | reports/final-release-20261113/video-probe.json | 294 |
 | reports/final-release-20261113/video-status.txt | 15 |

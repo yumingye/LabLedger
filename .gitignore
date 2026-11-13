@@ -32,3 +32,7 @@ final_optimization/reports/release-verification_*.png
 final_optimization/reports/browser-release-verification.json
 /Microsoft/
 **/ModuleAnalysisCache
+reports/remote-fresh-install*.txt
+reports/remote-browser-install.txt
+reports/remote-verifier-output.txt
+reports/clone-hash-verification.txt

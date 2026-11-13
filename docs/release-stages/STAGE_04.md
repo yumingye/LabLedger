@@ -2,8 +2,6 @@
 
 日期：2026-11-13。状态：PASS
 
-本轮114项通过，视频完整解码通过；新环境按README安装验证正在执行。原测试未改。
+前3阶段核验通过后冻结产品e76020a；原环境114项、全新联网候选114项及真实浏览器9步/12下载/备份恢复/重启通过，正式视频211.32秒完整解码通过。原测试预期未改。
 
-依据：FINAL_REPOSITORY_TASK_QUEUE.md。此阶段在前一阶段验收后串行接续；当前检查点不表示后续阶段已经执行。具体命令、结果与证据见 FINAL_ACCEPTANCE_REPORT.md。
-
-本轮补充：独立候选联网安装、114项测试、9步/12下载/恢复与重启均PASS。源码、文档和正式视频准备齐全；SHA256在公开提交前实际核验。证据reports/final-release-20261113/rehearsal/。阶段6仅在本地准入通过后开始。
+命令：加载scripts/env.ps1；python -m pytest -q --junitxml=reports/final-release-20261113/tests-rerun.xml；独立副本install.ps1、pip check、python scripts/verify_final_release.py；ffprobe与ffmpeg解码。完整证据reports/final-release-20261113/tests-rerun.*、rehearsal/、video-*.txt及FINAL_ACCEPTANCE_REPORT.md。
