@@ -1,5 +1,7 @@
 # 软件架构与设计决策
 
+比赛版表格操作从同一 SQLite 读事务获取记录与数据集版本号。浏览器提交新增、编辑或删除时回调写入原有乐观锁事务，同时创建可恢复版本。图表预览与导出使用同一份字段选择和有效坐标规则，图表数据 CSV 仅包含当前绘制记录，双倍像素 PNG 保持用户选择的样式比例。
+
 ## 分层
 
 Streamlit 展示层（app.py）→ 领域服务（validation / analysis / charts / exports / demo）→ Store（db.py）→ SQLite。

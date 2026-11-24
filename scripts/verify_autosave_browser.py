@@ -175,11 +175,14 @@ def main():
         browser.close()
         if video:
             destination = ROOT / "demo" / "LabLedger_自动保存与导出.mp4"
+            if destination.exists():
+                destination = run / destination.name
             subprocess.run(
                 ["ffmpeg", "-n", "-i", str(video.path()), "-c:v", "libx264",
                  "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(destination)],
                 cwd=ROOT, check=True,
             )
+            print(f"Recording: {destination}")
     print("PASS: isolated project → CSV → quality → autosave → chart PNG and CSV → restart")
 
 
