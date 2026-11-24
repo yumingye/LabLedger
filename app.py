@@ -13,7 +13,7 @@ from labledger.db import Store
 from labledger.errors import LedgerError
 from labledger.validation import quality
 from labledger.analysis import statistics, recommendations, trend
-from labledger.charts import ChartConfig, plot, png
+from labledger.charts import ChartConfig, available_fonts, plot, png, prepare
 from labledger.exports import import_csv, csv_bytes, raw_bytes, filename
 from labledger.demo import load_demo
 from labledger.v2_ui import PAGES
@@ -71,17 +71,41 @@ def create_dataset(store: Store, pid: int) -> None:
             store.create_dataset(pid,name,fields)
             rerun('数据表已创建。')
 
-def data_page(store: Store,pid: int,did: int,frame: pd.DataFrame,fields: list[dict]) -> None:
+def autosave_table(store: Store, pid: int, did: int, frame: pd.DataFrame, revision: int, key: str) -> None:
+    changes = st.session_state[key]
+    edited = frame.copy().astype(object)
+    for row, values in changes['edited_rows'].items():
+        for column, value in values.items():
+            edited.at[int(row), column] = value
+    edited = edited.drop(index=changes['deleted_rows'])
+    if changes['added_rows']:
+        added = pd.DataFrame(changes['added_rows'], columns=edited.columns)
+        edited = pd.concat([edited, added], ignore_index=True)
+    if edited.equals(frame.astype(object)):
+        return
+    try:
+        store.save_frame(pid, did, edited, revision, '表格自动保存')
+    except LedgerError as exc:
+        st.session_state['autosave_error'] = f'此次修改未保存。{exc}'
+    except (sqlite3.Error, OSError):
+        logging.exception('Table autosave failed')
+        st.session_state['autosave_error'] = '此次修改未保存，请检查本地存储后重试。'
+    else:
+        st.session_state['notice'] = '表格修改已自动保存。'
+
+
+def data_page(store: Store,pid: int,did: int,frame: pd.DataFrame,fields: list[dict],revision: int) -> None:
     st.subheader('数据工作台')
-    st.caption('原始单元格以文本保存以保留异常输入；数值分析时按字段定义转换。表格修改后请保存。')
+    st.caption('提交单元格编辑后自动保存到 SQLite。空值和异常值会保留，并在质量中心标记。')
+    if error := st.session_state.pop('autosave_error', None):
+        st.error(error)
     edit,view,upload=st.tabs(['录入与编辑','搜索与筛选','CSV 导入'])
     with edit:
-        revision=store.dataset(pid,did)['revision']
-        edited=st.data_editor(frame.astype(object),num_rows='dynamic',hide_index=False,width='stretch',key=f'editor_{pid}_{did}_{revision}')
-        st.caption('在末行添加记录；选择左侧行号后按 Delete 删除整行。空值和错误值可保存，质量中心会提示。')
-        if st.button('保存数据修改',type='primary'):
-            store.save_frame(pid,did,edited,revision)
-            rerun('数据已持久化保存。')
+        key = f'editor_{pid}_{did}_{revision}'
+        st.data_editor(frame.astype(object), num_rows='dynamic', hide_index=False,
+                       width='stretch', key=key, on_change=autosave_table,
+                       args=(store, pid, did, frame, revision, key))
+        st.caption('在末行添加记录。选择行号后按 Delete 删除整行，可在数据清洗页恢复旧版本。')
         with st.expander('单条记录操作（也可使用上方表格）'):
             with st.form(f'add_{did}'):
                 row={f['name']:st.text_input(f"{f['name']} · {f['type']}",key=f'add_{did}_{f["name"]}') for f in fields}
@@ -186,16 +210,32 @@ def chart_page(store: Store,pid: int,did: int,frame: pd.DataFrame,fields: list[d
             marker=st.selectbox('数据点样式',['circle','square','diamond'])
             grid=st.checkbox('显示网格',True)
             legend=st.checkbox('显示图例',True)
+            font = st.selectbox('图表字体', available_fonts())
+            font_size = st.slider('字体字号', 10, 26, 14)
             width=st.slider('导出宽度（px）',600,1800,1000,100)
             height=st.slider('图表高度（px）',300,900,480,20)
         c=ChartConfig(x=x,y=y,kind=kind,group=None if grouping=='不分组' else grouping,title=title,palette=palette,
-                      fit=fit and kind!='柱状图',xlabel=xlabel,ylabel=ylabel,marker=marker,grid=grid,legend=legend,width=width,height=height,date_x=xtype=='日期',numeric_x=xtype=='数字')
+                      fit=fit and kind!='柱状图',xlabel=xlabel,ylabel=ylabel,marker=marker,grid=grid,legend=legend,width=width,height=height,date_x=xtype=='日期',numeric_x=xtype=='数字',
+                      font_family=font,font_size=font_size)
     with canvas:
+        data = prepare(frame, c)
+        if data.empty:
+            st.info('所选字段没有可绘制的记录。请选择其他字段，或检查数据质量。')
+            return
         st.plotly_chart(plot(frame,c),width='stretch')
-        st.caption('仅绘制 X/Y 均有效的记录；原始数据仍完整保留。柱状图重复坐标会并列/叠加，请按实验含义选择分组。')
-        a,b=st.columns(2)
-        a.download_button('↓ 导出 PNG',png(frame,c),filename(project,title,'png'),'image/png',width='stretch')
-        if b.button('＋ 添加到仪表盘',width='stretch'):
+        st.caption(f'共绘制 {len(data):,} 条有效记录。高清 PNG 为 {width * 2} × {height * 2} 像素。')
+        a, b, actions = st.columns(3)
+        with a:
+            try:
+                image = png(frame, c, scale=2)
+            except (ValueError, OSError, RuntimeError):
+                logging.exception('Chart PNG export failed')
+                st.error('无法生成 PNG。请调整图表尺寸或字体后重试。')
+            else:
+                st.download_button('↓ 导出 PNG', image, filename(project, title, 'png'), 'image/png', width='stretch')
+        columns = list(dict.fromkeys(name for name in (c.x, c.y, c.group) if name is not None))
+        b.download_button('↓ 图表数据 CSV', csv_bytes(data[columns]), filename(project, title, 'csv'), 'text/csv', width='stretch')
+        if actions.button('＋ 添加到仪表盘',width='stretch'):
             config=store.dashboard(pid)
             config['charts'].append({'dataset_id':did,**c.to_dict()})
             store.save_dashboard(pid,config)
@@ -288,8 +328,8 @@ def main() -> None:
         st.info('此实验还没有数据表。展开上方设置，自定义字段后创建数据表。'); return
     labels={d['id']:d['name'] for d in datasets}
     did=st.selectbox('数据集',list(labels),format_func=labels.get,key=f'dataset_{pid}')
-    frame=store.frame(pid,did)
-    fields=json.loads(store.dataset(pid,did)['schema_json'])
+    dataset, frame = store.dataset_snapshot(pid, did)
+    fields = json.loads(dataset['schema_json'])
     report=quality(frame,fields)
     metrics(frame,report,fields)
     # Explicit navigation avoids calculating PNG and all charts on every data edit.
@@ -298,6 +338,12 @@ def main() -> None:
     if page in PAGES:
         PAGES[page](store,pid,did,frame,fields)
     elif page=='总览':
+        for column, label, destination in zip(
+            st.columns(3),
+            ('录入或导入数据', '检查数据质量', '生成与导出图表'),
+            ('数据记录', '质量中心', '图表工坊'),
+        ):
+            column.button(label, width='stretch', on_click=st.session_state.update, args=({'page': destination},))
         all_projects=store.projects(); counts=store.workspace_counts()
         st.caption(f'工作空间：{counts["projects"]} 个实验 · {counts["datasets"]} 个数据集 · {counts["records"]} 条记录')
         st.info('推荐流程：数据记录导入 → 数据清洗预览 → 专业统计与实验对比 → 数字档案封存与重跑 → 报告中心导出。基础统计和旧图表入口继续兼容。')
@@ -316,7 +362,7 @@ def main() -> None:
             st.subheader('规则洞察')
             for message in recommendations(frame,fields,report):
                 st.info(message)
-    elif page=='数据记录': data_page(store,pid,did,frame,fields)
+    elif page=='数据记录': data_page(store,pid,did,frame,fields,dataset['revision'])
     elif page=='质量中心': quality_page(frame,fields,report)
     elif page=='统计分析': analysis_page(frame,fields)
     elif page=='图表工坊': chart_page(store,pid,did,frame,fields,project['name'])

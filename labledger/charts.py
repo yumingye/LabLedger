@@ -13,6 +13,7 @@ from .analysis import numeric, trend
 from .errors import LedgerError
 
 PALETTES = {'海盐青':['#0e9285','#4c70d6','#eea23b','#b86ab9'], '深海蓝':['#3b68d9','#45b6ba','#e6aa45','#db7089'], '暖日橙':['#e88c30','#d85569','#549f92','#697ac7']}
+FONTS = ('Microsoft YaHei', 'SimHei', 'Noto Sans CJK SC')
 
 @dataclass
 class ChartConfig:
@@ -32,6 +33,8 @@ class ChartConfig:
     fit: bool = False
     date_x: bool = False
     numeric_x: bool = False
+    font_family: str = 'Microsoft YaHei'
+    font_size: int = 14
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -59,6 +62,8 @@ def prepare(frame: pd.DataFrame, config: ChartConfig) -> pd.DataFrame:
 def plot(frame: pd.DataFrame, config: ChartConfig) -> go.Figure:
     c = config
     data = prepare(frame,c)
+    if c.kind == '柱状图' and c.x != c.y:
+        data[c.x] = data[c.x].astype(str)
     options = dict(data_frame=data,x=c.x,y=c.y,color=c.group,title=c.title,color_discrete_sequence=PALETTES[c.palette])
     if c.kind=='折线图':
         fig = px.line(**options,markers=True)
@@ -67,29 +72,34 @@ def plot(frame: pd.DataFrame, config: ChartConfig) -> go.Figure:
     else:
         fig = px.scatter(**options)
     fig.update_traces(marker_symbol=c.marker) if c.kind!='柱状图' else None
-    if c.fit and (c.numeric_x or c.date_x):
+    if not c.group:
+        fig.update_traces(name=c.y, showlegend=True)
+    if c.fit and c.kind != '柱状图' and (c.numeric_x or c.date_x):
         groups = data.groupby(c.group,sort=False) if c.group else [('全部',data)]
-        for label, subset in groups:
+        for index, (label, subset) in enumerate(groups):
             result = trend(subset,c.x,c.y,c.date_x)
             if result:
                 fit_x = pd.to_datetime(result['x'],unit='D') if c.date_x else result['x']
                 order = np.argsort(result['x'])
-                fig.add_scatter(x=np.asarray(fit_x)[order],y=np.asarray(result['predicted'])[order],mode='lines',name=f'{label} · 趋势',line={'dash':'dash'})
+                color = PALETTES[c.palette][index % len(PALETTES[c.palette])]
+                fig.add_scatter(x=np.asarray(fit_x)[order],y=np.asarray(result['predicted'])[order],mode='lines',name=f'{label} · 趋势',line={'dash':'dash', 'color':color})
     fig.update_layout(template='plotly_white',height=c.height,width=c.width,showlegend=c.legend,
-                      font={'family':'Microsoft YaHei, sans-serif','color':'#27405d'},
+                      font={'family':f'{c.font_family}, sans-serif','size':c.font_size,'color':'#27405d'},
                       margin={'l':40,'r':24,'t':65,'b':45},paper_bgcolor='white',plot_bgcolor='white',
                       xaxis_title=c.xlabel or c.x,yaxis_title=c.ylabel or c.y,
-                      legend_title_text=c.group or '',title_font_size=20)
+                      legend_title_text=c.group or '',title_font_size=c.font_size + 6)
     fig.update_xaxes(showgrid=c.grid,gridcolor='#edf1f6')
     fig.update_yaxes(showgrid=c.grid,gridcolor='#edf1f6')
     return fig
 
-def png(frame: pd.DataFrame, config: ChartConfig) -> bytes:
+def png(frame: pd.DataFrame, config: ChartConfig, *, scale: int = 1) -> bytes:
     c = config
     data = prepare(frame,c)
-    font = next((f.name for f in font_manager.fontManager.ttflist if f.name in ('Microsoft YaHei','SimHei','Noto Sans CJK SC')), 'DejaVu Sans')
-    with matplotlib.rc_context({'font.family':font,'axes.unicode_minus':False}):
-        fig = Figure(figsize=(c.width/100,c.height/100),dpi=100,layout='constrained')
+    fonts = available_fonts()
+    font = c.font_family if c.font_family in fonts else fonts[0]
+    with matplotlib.rc_context({'font.family':font,'font.size':c.font_size * .72,
+                                'axes.titlesize':(c.font_size + 6) * .72,'axes.unicode_minus':False}):
+        fig = Figure(figsize=(c.width/100,c.height/100),dpi=100 * scale,layout='constrained')
         ax = fig.subplots()
         groups = list(data.groupby(c.group,sort=False)) if c.group else [(c.y,data)]
         for i,(label,subset) in enumerate(groups):
@@ -116,10 +126,17 @@ def png(frame: pd.DataFrame, config: ChartConfig) -> bytes:
                     if c.kind!='柱状图':
                         ax.plot(np.asarray(fit_x)[order],np.asarray(result['predicted'])[order],'--',color=color,label=f'{label} · 趋势')
         ax.set(title=c.title,xlabel=c.xlabel or c.x,ylabel=c.ylabel or c.y)
-        ax.grid(c.grid,alpha=.15)
+        if c.grid:
+            ax.grid(True, alpha=.15)
+        else:
+            ax.grid(False)
         ax.set_axisbelow(True)
         if c.legend and len(data):
-            ax.legend()
+            ax.legend(title=c.group or None)
         output=BytesIO()
-        fig.savefig(output,format='png',dpi=100)
+        fig.savefig(output,format='png',dpi=100 * scale)
         return output.getvalue()
+
+def available_fonts() -> list[str]:
+    installed = {font.name for font in font_manager.fontManager.ttflist}
+    return [font for font in FONTS if font in installed] or ['DejaVu Sans']

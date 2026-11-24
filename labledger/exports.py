@@ -51,4 +51,5 @@ def raw_bytes(frame: pd.DataFrame, fields: list[dict]) -> bytes:
 
 def filename(project: str, kind: str, suffix: str) -> str:
     safe=re.sub(r'[<>:"/\\|?*\x00-\x1f]','_',project).strip('. ')[:60] or '实验'
-    return f'{safe}_{kind}_{datetime.now():%Y%m%d_%H%M%S}.{suffix}'
+    safe_kind = re.sub(r'[<>:"/\\|?*\x00-\x1f]', '_', kind).strip('. ')[:60] or '导出'
+    return f'{safe}_{safe_kind}_{datetime.now():%Y%m%d_%H%M%S}.{suffix}'

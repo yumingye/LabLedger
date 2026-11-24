@@ -101,10 +101,19 @@ class Store:
             return dict(row)
 
     def frame(self, pid: int, did: int) -> pd.DataFrame:
-        fields = json.loads(self.dataset(pid,did)['schema_json'])
+        return self.dataset_snapshot(pid, did)[1]
+
+    def dataset_snapshot(self, pid: int, did: int) -> tuple[dict, pd.DataFrame]:
         with self.connect() as db:
+            db.execute('BEGIN')
+            dataset = db.execute(
+                'SELECT * FROM datasets WHERE project_id=? AND id=?', (pid, did)
+            ).fetchone()
+            if dataset is None:
+                raise LedgerError('数据集不存在或不属于当前实验。')
+            fields = json.loads(dataset['schema_json'])
             rows = [json.loads(r['payload']) for r in db.execute('SELECT payload FROM records WHERE dataset_id=? ORDER BY id', (did,))]
-        return pd.DataFrame(rows, columns=[f['name'] for f in fields])
+        return dict(dataset), pd.DataFrame(rows, columns=[f['name'] for f in fields])
 
     def save_frame(self, pid: int, did: int, frame: pd.DataFrame, revision: int | None = None, operation: str = '数据录入/导入', parameters: dict | None = None, fields: list | None = None) -> None:
         dataset = self.dataset(pid,did)
