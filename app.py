@@ -83,6 +83,16 @@ def autosave_table(store: Store, pid: int, did: int, frame: pd.DataFrame, revisi
         edited = pd.concat([edited, added], ignore_index=True)
     if edited.equals(frame.astype(object)):
         return
+    save_edited_data(store, pid, did, edited, revision)
+
+
+def autosave_field(store: Store, pid: int, did: int, frame: pd.DataFrame, revision: int, row: int, column: str, key: str) -> None:
+    edited = frame.copy().astype(object)
+    edited.at[row, column] = st.session_state[key]
+    save_edited_data(store, pid, did, edited, revision)
+
+
+def save_edited_data(store: Store, pid: int, did: int, edited: pd.DataFrame, revision: int) -> None:
     try:
         store.save_frame(pid, did, edited, revision, '表格自动保存')
     except LedgerError as exc:
@@ -106,6 +116,17 @@ def data_page(store: Store,pid: int,did: int,frame: pd.DataFrame,fields: list[di
                        width='stretch', key=key, on_change=autosave_table,
                        args=(store, pid, did, frame, revision, key))
         st.caption('在末行添加记录。选择行号后按 Delete 删除整行，可在数据清洗页恢复旧版本。')
+        if len(frame):
+            with st.expander('逐字段编辑（自动保存）'):
+                row = st.number_input('编辑行号', min_value=1, max_value=len(frame),
+                                      step=1, key=f'autosave_row_{pid}_{did}') - 1
+                for field in fields:
+                    column = field['name']
+                    value = frame.at[row, column]
+                    field_key = f'autosave_{pid}_{did}_{revision}_{row}_{column}'
+                    st.text_input(f'{column} · 自动保存', value='' if pd.isna(value) else str(value),
+                                  key=field_key, on_change=autosave_field,
+                                  args=(store, pid, did, frame, revision, row, column, field_key))
         with st.expander('单条记录操作（也可使用上方表格）'):
             with st.form(f'add_{did}'):
                 row={f['name']:st.text_input(f"{f['name']} · {f['type']}",key=f'add_{did}_{f["name"]}') for f in fields}

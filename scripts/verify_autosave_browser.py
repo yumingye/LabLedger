@@ -1,4 +1,4 @@
-"""Verify a fresh LabLedger project, real grid editing, exports and restart."""
+"""Verify a fresh LabLedger project, autosave, real downloads and restart."""
 
 import argparse
 import csv
@@ -129,17 +129,16 @@ def main():
             hold(page, "质量中心标出无法参与数值绘图的示例输入", args.record)
             nav("数据记录")
             page.get_by_role("tab", name="录入与编辑").click()
-            canvas = page.locator('[role="tabpanel"]:visible canvas').first
-            page.screenshot(path=run / "data-editor.png")
-            canvas.dblclick(position={"x": 125, "y": 50}, force=True)
-            page.keyboard.press("Control+a")
-            page.keyboard.type("1.5")
-            page.keyboard.press("Enter")
+            page.get_by_text("逐字段编辑（自动保存）", exact=True).click()
+            field = page.get_by_role("textbox", name="时间 · 自动保存", exact=True)
+            expect(field).to_have_value("1")
+            field.fill("1.5")
+            field.press("Enter")
             expect(page.get_by_text("表格修改已自动保存。", exact=True)).to_be_visible()
             with sqlite3.connect(run / "lab.sqlite3") as db:
                 payload = db.execute("SELECT payload FROM records ORDER BY id LIMIT 1").fetchone()[0]
                 assert json.loads(payload)["时间"] == "1.5", payload
-            hold(page, "表格修改提交后自动写入 SQLite，并生成可恢复的数据版本", args.record)
+            hold(page, "在录入页逐字段编辑，提交后自动写入 SQLite 并生成版本", args.record)
             nav("图表工坊")
             title = page.get_by_role("textbox", name="图表标题", exact=True)
             title.fill("测量值随时间变化")
@@ -147,7 +146,7 @@ def main():
             page.get_by_text("更多样式", exact=True).click()
             slider = page.get_by_test_id("stSlider").filter(has_text="字体字号").get_by_role("slider")
             slider.press("ArrowRight")
-            expect(slider).to_have_attribute("aria-valuenow", "15")
+            expect(slider).to_have_value("15")
             grid = page.get_by_role("checkbox", name="显示网格")
             grid.press("Space")
             expect(grid).not_to_be_checked()
@@ -168,8 +167,8 @@ def main():
             expect(metrics.first).to_have_text("4")
             nav("数据记录")
             page.get_by_role("tab", name="录入与编辑").click()
-            page.get_by_text("单条记录操作（也可使用上方表格）", exact=True).click()
-            expect(page.get_by_role("textbox", name="时间", exact=True)).to_have_value("1.5")
+            page.get_by_text("逐字段编辑（自动保存）", exact=True).click()
+            expect(page.get_by_role("textbox", name="时间 · 自动保存", exact=True)).to_have_value("1.5")
             hold(page, "关闭并重启应用后，原实验、四条记录和刚才的表格修改均已恢复", args.record, 15)
         video = page.video
         context.close()
@@ -181,7 +180,7 @@ def main():
                  "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(destination)],
                 cwd=ROOT, check=True,
             )
-    print("PASS: isolated project → CSV → quality → grid autosave → chart PNG and CSV → restart")
+    print("PASS: isolated project → CSV → quality → autosave → chart PNG and CSV → restart")
 
 
 if __name__ == "__main__":
